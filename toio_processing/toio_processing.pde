@@ -41,7 +41,7 @@ void setup() {
   //create cubes
   cubes = new Cube[nCubes];
   for (int i = 0; i< cubes.length; ++i) {
-    cubes[i] = new Cube(i, true);
+    cubes[i] = new Cube(i, true);k
   }
 
   //do not send TOO MANY PACKETS

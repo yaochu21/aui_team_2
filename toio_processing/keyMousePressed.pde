@@ -31,6 +31,9 @@ void keyPressed() {
     //motorTarget(1, 0, 700, 286, 90);
     magneticRequest(0);
     break;
+   case 'r':
+     light(103, 3000, 255, 0, 0);
+     break;
   
   //case 'a':
   //  motorAcceleration(0, 50, 5, 15, 0, 0, 0, 100);
