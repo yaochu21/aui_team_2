@@ -1,5 +1,4 @@
 void keyPressed() {
-  
   switch(key) {
   case 'f':
     try {
@@ -38,7 +37,6 @@ void keyPressed() {
   //case 'a':
   //  motorAcceleration(0, 50, 5, 15, 0, 0, 0, 100);
   //  break;
-    
   case 'b':
      //for (int i = 0; i < cubes.length; i++) {
      //  println("Battery level of cube " + i + ": " + cubes[i].battery);
