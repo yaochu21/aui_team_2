@@ -15,7 +15,7 @@ NetAddress[] server;
 Cube[] cubes;
 
 boolean mouseDrive = false;
-boolean chase = false;
+boolean chase = true;
 boolean spin = false;
 
 
@@ -41,7 +41,7 @@ void setup() {
   //create cubes
   cubes = new Cube[nCubes];
   for (int i = 0; i< cubes.length; ++i) {
-    cubes[i] = new Cube(i, true);k
+    cubes[i] = new Cube(i, true);
   }
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
@@ -72,7 +72,7 @@ void draw() {
       popMatrix();
     }
   }
-  //text("sdasdsadsadsa", 50, 50);
+  
   for (int i = 0; i < cubes.length; ++i) {
     fill(0, 0, 0);
     text("Cube ID: " + String.valueOf(cubes[i].id), 500, 100 + 60 * i);

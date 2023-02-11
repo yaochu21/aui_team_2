@@ -21,7 +21,7 @@ void setup() {
   // (The offscreen buffer can be P2D or P3D)
   ken = loadImage("ken.png");
   ken.resize(400, 400);
-  anup = loadImage("anup.png");
+  anup = loadImage("nup.png");
   anup.resize(400, 400);
   offscreen = createGraphics(400, 400, P3D);
   offscreen2 = createGraphics(400, 400, P3D);
@@ -37,7 +37,7 @@ void draw() {
   offscreen.beginDraw();
   offscreen.background(0);
   //offscreen.fill(0, 255, 0);
-  offscreen2.image(anup, 0, 0);
+  offscreen.image(anup, 0, 0);
   //offscreen.ellipse(surfaceMouse.x, surfaceMouse.y, 75, 75);
   offscreen.endDraw();
   

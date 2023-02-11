@@ -23,6 +23,7 @@ void motorControl(int cubeId, float leftspeed, float rightspeed, int duration) {
   msg.add((int)leftspeed);
   msg.add((int)rightspeed);
   msg.add(duration);
+  
   oscP5.send(msg, server[hostId]);
 }
 
