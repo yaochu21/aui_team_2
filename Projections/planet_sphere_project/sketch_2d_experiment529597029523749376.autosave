@@ -1,0 +1,67 @@
+public class Color {
+    public float r;
+    public float g;
+    public float b;
+    public float a;
+
+    public float t_r;
+    public float t_g;
+    public float t_b;
+    public float t_a;
+    
+    Color(float red, float green, float blue, float alpha) {
+        r = red;
+        g = green;
+        b = blue;
+        a = alpha;
+
+        t_r = red;
+        t_g = green;
+        t_b = blue;
+        t_a = alpha;
+    }
+    
+    public color get_temp_color() {
+        return color(t_r,t_g,t_b,t_a);
+    }
+
+    public color next_color() {
+        t_r -= 1;
+        t_g -= 1;
+        t_b -= 1;
+        return color(t_r,t_g,t_b,t_a);
+    }
+
+    public void reset_color() {
+        t_r = r;
+        t_g = g;
+        t_b = b;
+    }
+    
+}
+
+Color col = new Color(255,255,255,1);
+
+void setup() {
+    size(1024, 1024);
+    rectMode(CENTER);
+}
+
+void draw() {
+    background(233,233,233,1);
+    generate_planet_projection(mouseX,mouseY,10,100,col.r,col.g,col.b);
+}
+
+void generate_planet_projection(float x, float y, float illuminosity, float rad, float r, float g, float b) {
+    float radius = rad;
+    fill(r,g,b);
+    Color c = new Color(r,g,b,1);
+
+    while (radius > 0) {
+        stroke(c.r,c.g,c.b);
+        c.next_color();
+        ellipse(x,y,radius*2,radius*2);
+        radius -= 1;
+    }
+    
+}
