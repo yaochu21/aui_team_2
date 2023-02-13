@@ -50,12 +50,12 @@ class ToioManager:
         hr_pos = self.find_closest_point(self.hr_x, self.hr_y)
 
         self.client.send_message("/toio", "hr", hr_pos)
-        self.client.send_message("/toio", "timeline", (x_pos, y_pos))
-        self.client.send_message("/toio", "star_top_l", (x_pos, y_pos))
-        self.client.send_message("/toio", "star_top_r", (x_pos, y_pos))
-        self.client.send_message("/toio", "star_bot_l", (x_pos, y_pos))
-        self.client.send_message("/toio", "star_bot_r", (x_pos, y_pos))
-        self.client.send_message("/toio", "planet_orbit", (x_pos, y_pos))
+        self.client.send_message("/toio", "timeline", x_pos, y_pos)
+        self.client.send_message("/toio", "star_top_l", x_pos, y_pos)
+        self.client.send_message("/toio", "star_top_r", x_pos, y_pos)
+        self.client.send_message("/toio", "star_bot_l", x_pos, y_pos)
+        self.client.send_message("/toio", "star_bot_r", x_pos, y_pos)
+        self.client.send_message("/toio", "planet_orbit", x_pos, y_pos)
 
 if __name__ == "__main__":
     ToioManager()
