@@ -112,6 +112,7 @@ void light(int cubeId, int duration, int red, int green, int blue) {
   msg.add(red);
   msg.add(green);
   msg.add(blue);
+  print(cubeId, cubesPerHost);
   oscP5.send(msg, server[hostId]);
 }
 

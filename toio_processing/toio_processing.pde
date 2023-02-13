@@ -1,10 +1,6 @@
 import oscP5.*;
 import netP5.*;
 
-
-
-
-
 //for OSC
 OscP5 oscP5;
 //where to send the commands to
@@ -14,15 +10,13 @@ NetAddress[] server;
 //we'll keep the cubes here
 Cube[] cubes;
 
-boolean mouseDrive = false;
-boolean chase = true;
-boolean spin = false;
+// Track specific toio functions to easy to digest references
+HashMap<String, Cube> toioMap;
 
 
 void settings() {
   size(1000, 1000, P3D);
 }
-
 
 void setup() {
   // for OSC
@@ -34,8 +28,6 @@ void setup() {
   server = new NetAddress[1]; //only one for now
   //send on port 3334
   server[0] = new NetAddress("127.0.0.1", 3334);
-  //server[1] = new NetAddress("192.168.0.103", 3334);
-  //server[2] = new NetAddress("192.168.200.12", 3334);
 
 
   //create cubes
@@ -43,12 +35,64 @@ void setup() {
   for (int i = 0; i< cubes.length; ++i) {
     cubes[i] = new Cube(i, true);
   }
+  toioMap = new HashMap();
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
 
   hr_setup();
   trail_setup();
+}
+
+float convertCoordSystem(float coord, int oldSysMin, int oldSysMax, int newSysMin, int newSysMax) {
+  float newSysRange = newSysMax - newSysMin + 1;
+  
+  float oldSysRange = oldSysMax - oldSysMin + 1;
+  
+  float fromLowerBound = coord - oldSysMin;
+  float rangeAmount = fromLowerBound / oldSysRange;
+  
+  float newCoord = newSysMin + rangeAmount * newSysRange;
+
+  return newCoord;
+}
+
+
+
+Cube hrCubeInput = null;
+Cube timelineCubeInput = null;
+Cube topLeftStarOutput = null;
+Cube topRightStarOutput = null;
+Cube bottomLeftStarOutput = null;
+Cube bottomRightStarOutput = null;
+Cube orbitingPlanetOutput = null;
+
+boolean calibrated = false;
+  
+void initCalibrate() {
+  // Initializing function to assign toio to specific interface parts
+    for (int i = 0; i< cubes.length; ++i) {
+      float x = cubes[i].getXPos();
+      float y = cubes[i].getYPos();
+      if (x < -20 && y < -20) {
+        toioMap.put("hr", cubes[i]); // top left quadrant, left mat
+      } else if (x > 20 && y < -20) {
+        toioMap.put("planet_orbit", cubes[i]); // top right quadrant, right mat
+      } else if (x < -20 && y > 20) {
+        toioMap.put("timeline", cubes[i]); // bottom left quadrant, left mat
+      } else if (x > -20 && x < 50 && y > -20 && y < 50) {
+        toioMap.put("star_top_l", cubes[i]);
+      } else if (x > 50 && y > -20 && y < 50) {
+        toioMap.put("star_top_r", cubes[i]);
+      } else if (x > -20 && x < 50 && y > 50) {
+        toioMap.put("star_bot_l", cubes[i]);
+      } else if (x > 50 && y > 50) {
+        toioMap.put("star_bot_r", cubes[i]);
+      }
+    }
+  if (toioMap.size() == 7) {
+    calibrated = true;
+  }
 }
 
 void draw() {
@@ -66,73 +110,64 @@ void draw() {
 
   //draw the cubes
   for (int i = 0; i < cubes.length; ++i) {
-    if (cubes[i].isLost==false) {
-      pushMatrix();
-      translate(cubes[i].x, cubes[i].y);
-      rotate(cubes[i].deg * PI/180);
-      rect(-10, -10, 20, 20);
-      rect(0, -5, 20, 10);
-      popMatrix();
-    }
+    
   }
   
-  for (int i = 0; i < cubes.length; ++i) {
-    fill(0, 0, 0);
-    text("Cube ID: " + String.valueOf(cubes[i].id), 500, 100 + 60 * i);
-    text("Left motor speed: " + String.valueOf(cubes[i].speed_left), 500, 120 + 60 * i);
-    text("Right motor speed: " + String.valueOf(cubes[i].speed_right), 500, 140 + 60 * i);
-  }
-  if (chase) {
-    cubes[0].targetx = cubes[0].x;
-    cubes[0].targety = cubes[0].y;
-    cubes[1].targetx = cubes[0].x;
-    cubes[1].targety = cubes[0].y;
-  }
-  //makes a circle with n cubes
-  if (mouseDrive) {
-    float mx = (mouseX);
-    float my = (mouseY);
-    float cx = 45+410/2;
-    float cy = 45+410/2;
-
-    float mulr = 180.0;
-
-    float aMouse = atan2( my-cy, mx-cx);
-    float r = sqrt ( (mx - cx)*(mx-cx) + (my-cy)*(my-cy));
-    r = min(mulr, r);
-    for (int i = 0; i< nCubes; ++i) {
-      if (cubes[i].isLost==false) {
-        float angle = TWO_PI*i/nCubes;
-        float na = aMouse+angle;
-        float tax = cx + r*cos(na);
-        float tay = cy + r*sin(na);
-        fill(255, 0, 0);
-        ellipse(tax, tay, 10, 10);
-        cubes[i].targetx = tax;
-        cubes[i].targety = tay;
+  int i = 0;
+  for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
+      String name = mapElement.getKey();
+      Cube cube = mapElement.getValue();
+      if (cube.isLost==false) {
+        pushMatrix();
+        translate(cube.x, cube.y);
+        rotate(cube.deg * PI/180);
+        rect(-10, -10, 20, 20);
+        rect(0, -5, 20, 10);
+        popMatrix();
       }
+      
+      fill(0, 0, 0);
+    text("Cube ID: " + name + " at (" + String.valueOf(cube.getXPos()) + ", " +
+       String.valueOf(cube.getYPos()) +")", 500, 100 + 60 * i);
+    text("Left motor speed: " + String.valueOf(cube.speed_left), 500, 120 + 60 * i);
+    text("Right motor speed: " + String.valueOf(cube.speed_right), 500, 140 + 60 * i);
+    
+    if (name.equals("hr") || name.equals("timeline")) {
+      OscMessage msg = new OscMessage("/toio_input");
+      msg.add(name);
+      msg.add(cube.getXPos());
+      msg.add(cube.getYPos());
+      
+      oscP5.send(msg, server[0]);
     }
+    i += 1;
   }
 
-  if (spin) {
-    motorControl(0, -100, 100, 30);
-  }
+  
+  
+  
+    if (!calibrated) {
+     initCalibrate(); 
+     if (calibrated) {
+       midi(0, 64, 255, 10);
+     }
+     return;
+    }
 
-  if (chase || mouseDrive) {
-    //do the actual aim
-    for (int i = 0; i< nCubes; ++i) {
+    // Allows cubes to move towards target
+    for (i = 0; i< nCubes; ++i) {
       if (cubes[i].isLost==false) {
         fill(0, 255, 0);
-        ellipse(cubes[i].targetx, cubes[i].targety, 10, 10);
+        
         aimCubeSpeed(i, cubes[i].targetx, cubes[i].targety);
       }
-    }
+    
   }
 
 
   //START DO NOT EDIT
   //did we lost some cubes?
-  for (int i=0; i<nCubes; ++i) {
+  for (i=0; i<nCubes; ++i) {
     // 500ms since last update
     cubes[i].p_isLost = cubes[i].isLost;
     if (cubes[i].lastUpdate < now - 1500 && cubes[i].isLost==false) {
