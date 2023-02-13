@@ -18,6 +18,9 @@ boolean mouseDrive = false;
 boolean chase = true;
 boolean spin = false;
 
+Keystone ks;
+CornerPinSurface surface, surface2;
+PGraphics offscreen, offscreen2;
 
 void settings() {
   size(1000, 1000, P3D);
@@ -46,6 +49,11 @@ void setup() {
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
+}
+
+void projection_setup() {
+  surface = ks.createCornerPinSurface(400, 400, 20);
+  surface2 = ks.createCornerPinSurface(400, 400, 20);
 }
 
 void draw() {
