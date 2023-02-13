@@ -1,4 +1,4 @@
-void setup() {
+void hr_setup() {
     size(600,650);
     noStroke();
     PImage main_seq = loadImage("main_sequence.png");

@@ -46,6 +46,9 @@ void setup() {
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
+
+  hr_setup();
+  trail_setup();
 }
 
 void draw() {
@@ -137,4 +140,9 @@ void draw() {
     }
   }
   //END DO NOT EDIT
+
+  trail_draw();
+  planet_draw();
+
+  
 }
