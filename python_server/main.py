@@ -14,8 +14,14 @@ class ToioManager:
         self.disp = Dispatcher()
         self.disp.map("/toio_input/*", self.handle_toio_pos_update)
 
+        self.hr_x = 0
+        self.hr_y = 0
+        self.timeline_x = 0
+        self.timeline_y = 0
+
         while True:
             self.update_position()
+            self.update_projections()
             sleep(1 / FRAME_RATE)
 
     def handle_toio_pos_update(self, address: str, x_pos: float, y_pos: float):
