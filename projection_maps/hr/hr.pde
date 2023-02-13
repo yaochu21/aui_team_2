@@ -1,7 +1,10 @@
 void setup() {
     size(600,650);
     noStroke();
-
+    PImage main_seq = loadImage("main_sequence.png");
+    PImage subgiants = loadImage("subgiants.png");
+    PImage supergiants = loadImage("supergiants.png");
+    PImage white_dwarfs = loadImage("white_dwarfs.png");
 
     color blue = color(150,220,255);
     color white = color(255,255,255);
@@ -14,6 +17,11 @@ void setup() {
     makeGradient(150,0,80,650,white,white_y);
     makeGradient(230,0,200,650,white_y,yellow);
     makeGradient(430,0,170,650,yellow,red);
+    tint(255,255,255,50);
+    image(main_seq,0,0,width,height);
+    image(subgiants,0,0,width,height);
+    image(supergiants,0,0,width,height);
+    image(white_dwarfs,0,0,width,height);
 
     // makeGradient(0,0,150,650,blue,white);
     // makeGradient(150,0,50,650,white,white_y);
