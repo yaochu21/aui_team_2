@@ -85,6 +85,35 @@ class Cube {
     res[1] = right;
     return res;
   }
+  
+  int TOL = 25;
+
+  int MIN_TOIO_BOUND = 45 + TOL;
+  int MAX_TOIO_BOUND = 455 - TOL;
+  
+  int MIN_GRID_BOUND = -100;
+  int MAX_GRID_BOUND = 100;
+  
+
+
+
+  void setXCoord(float regularCoord) {
+    // Set an X coordinate in [-100, 100] range to the toio (circle) mat space
+    targetx = convertCoordSystem(regularCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
+  }
+  
+  void setYCoord(float regularCoord) {
+    // Set an Y coordinate in [-100, 100] range to the toio (circle) mat space
+    targety = convertCoordSystem(regularCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
+  }
+  
+  float getXPos() {
+    return convertCoordSystem(x, MIN_TOIO_BOUND, MAX_TOIO_BOUND, MIN_GRID_BOUND, MAX_GRID_BOUND); 
+  }
+  
+  float getYPos() {
+    return convertCoordSystem(y, MIN_TOIO_BOUND, MAX_TOIO_BOUND, MIN_GRID_BOUND, MAX_GRID_BOUND); 
+  }
 
 
   //This function defines how the cubes aims at something

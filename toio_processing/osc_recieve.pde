@@ -131,5 +131,12 @@ void oscEvent(OscMessage msg) {
     int id = cubesPerHost*hostId + relid;
     cubes[id].speed_left = motor_left;
     cubes[id].speed_right = motor_right;
+  } else if (calibrated && msg.checkAddrPattern("/toio")) {
+    String toioName = msg.get(0).stringValue();
+    float xPos = msg.get(1).floatValue();
+    float yPos = msg.get(2).floatValue();
+    
+    toioMap.get(toioName).setXCoord(xPos);
+    toioMap.get(toioName).setYCoord(yPos);
   }
 }

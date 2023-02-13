@@ -31,7 +31,7 @@ void keyPressed() {
     magneticRequest(0);
     break;
    case 'r':
-     light(103, 3000, 255, 0, 0);
+     light(0, 3000, 255, 0, 0);
      break;
   
   //case 'a':
@@ -111,12 +111,6 @@ void keyPressed() {
     midi(0, 68, 255, 10);
     break;
     
-  case 'd':
-    chase = false;
-    spin = false;
-    mouseDrive = false;
-    break;
-    
   case 'a':
     for (int i=0; i < nCubes; ++i) {
       //aimMotorControl(i, 380, 260)
@@ -135,14 +129,4 @@ void keyPressed() {
     break;
     
   }
-}
-
-void mousePressed() {
-  chase = false;
-  spin = false;
-  mouseDrive=true;
-}
-
-void mouseReleased() {
-  mouseDrive=false;
 }
