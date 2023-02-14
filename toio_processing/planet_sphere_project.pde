@@ -95,7 +95,6 @@ void project_planet(float x, float y, float rad, float r, float g, float b) {
     PColor c = new PColor(r-rad,g-rad,b-rad,1);
     float decrement = 1;
 
-    offscreen1.beginDraw();
     float step = 0;
     float total = floor(radius);
     while (step < total) {
@@ -105,5 +104,4 @@ void project_planet(float x, float y, float rad, float r, float g, float b) {
         offscreen1.ellipse(x,y,radius*2,radius*2);
         step += 1;
     }
-    offscreen1.endDraw();
 }
