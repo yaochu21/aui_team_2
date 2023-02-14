@@ -15,6 +15,7 @@ PImage slider;
 void project_hr_and_slider() {
   offscreen2.beginDraw();
   offscreen2.background(0);
+  offscreen2.rotate(PI);
   offscreen2.image(hr, 0, 0);
   offscreen2.endDraw();
 
