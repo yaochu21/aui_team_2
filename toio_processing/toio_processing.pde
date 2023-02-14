@@ -216,4 +216,5 @@ void draw() {
   project_planet(center_x, center_y, rad, star_r, star_g, star_b);
   offscreen1.endDraw();
   surface1.render(offscreen1);
+  
 }
