@@ -106,19 +106,25 @@ def hrmatching(hr_xcord,hr_ycord):
         topleftrad = (-40, 40)
         bottomleftrad = (-40, -40)
         bottomrightrad = (40, -40)
-    elif radiusmatch>= 0.001 and radiusmatch<0.01:
+    elif radiusmatch>= 0.1 and radiusmatch<1:
+        # print("topleftrad0.1")
+        toprightrad = (35, 35)
+        topleftrad = (-35, 35)
+        bottomleftrad = (-35, -35)
+        bottomrightrad = (35, -35)
+    elif radiusmatch>= 0.01 and radiusmatch<0.1:
         # print("topleftrad0.01")
         toprightrad = (30, 30)
         topleftrad = (-30, 30)
         bottomleftrad = (-30, -30)
         bottomrightrad = (30, -30)
-    elif radiusmatch >= 0.0001 and radiusmatch<0.001:
+    elif radiusmatch >= 0.001 and radiusmatch<0.01:
         # print("topleftrad0.001")
         toprightrad = (20, 20)
         topleftrad = (-20, 20)
         bottomleftrad = (-20, -20)
         bottomrightrad = (20, -20)
-    elif radiusmatch < 0.0001:
+    elif radiusmatch < 0.001:
         toprightrad = (10, 10)
         topleftrad = (-10, 10)
         bottomleftrad = (-10, -10)
