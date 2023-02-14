@@ -203,6 +203,7 @@ void draw() {
   project_hr_and_slider();
 
   offscreen1.beginDraw();
+  offscreen1.background(0);
   float orbit_x = toioMap.get("planet_orbit").getXPos();
   float orbit_y = toioMap.get("planet_orbit").getYPos();
   orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
@@ -216,5 +217,4 @@ void draw() {
   project_planet(center_x, center_y, rad, star_r, star_g, star_b);
   offscreen1.endDraw();
   surface1.render(offscreen1);
-  
 }
