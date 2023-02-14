@@ -188,7 +188,7 @@ def hrmatching(hr_xcord,hr_ycord):
         # print(snap_sliderpos)
     #etc
 
-    return snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (80.0,snap_sliderpos), radiusmatch, color
+    return snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (snap_sliderpos, 80), radiusmatch, color
 
 #[(#,#),(#,#),(#,#),(#,#),(#,#),(#,#),"blue"]
 #[snap to hr coordinates, top left toio position, top right toio position, bottom left toio posion, bottom right toio posion, slider toio position, raw radius value, color]

@@ -52,7 +52,7 @@ void projection_setup() {
      // enter/leave calibration mode, where surfaces can be warped 
      // and moved
      ks.toggleCalibration();
-     calibrated = !calibrated;
+     //calibrated = !calibrated;
      break;
 
    case 'l':

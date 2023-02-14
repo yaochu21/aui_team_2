@@ -37,7 +37,7 @@ class ToioManager:
 
     def handle_toio_pos_update(self, addr: str, name: str, x_pos: float, y_pos: float):
         if "hr" == name:
-            if abs(x_pos - self.hr_x) > 5 or abs(y_pos - self.hr_y) > 5:
+            if abs(x_pos - self.hr_x) > 10 or abs(y_pos - self.hr_y) > 10:
                 self.hr_x = x_pos
                 self.hr_y = y_pos
                 self.update_measure = "hr"

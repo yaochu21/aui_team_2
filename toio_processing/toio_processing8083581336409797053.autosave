@@ -195,7 +195,7 @@ void draw() {
       
     }
 
-  motionRequest(toioMap.get("timeline").id);
+  //motionRequest(toioMap.get("timeline").id);
 
   // ------------- //
   
@@ -203,18 +203,16 @@ void draw() {
   project_hr_and_slider();
 
   offscreen1.beginDraw();
-  offscreen1.background(0);
   float orbit_x = toioMap.get("planet_orbit").getXPos();
   float orbit_y = toioMap.get("planet_orbit").getYPos();
-  float rad = (float) Math.sqrt((double) (orbit_x * orbit_x + orbit_y * orbit_y)) / 2;
   orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
   orbit_y = convertCoordSystem(orbit_y,-100,100,0,1000);
   project_trail(orbit_x,orbit_y);
   
   // These are in the [-100, 100] coordinate system
-  float center_x = 500.0;
-  float center_y = 500.0;
-  
+  float center_x = 0.0;
+  float center_y = 0.0;
+  float rad = (float) Math.sqrt((double) (orbit_x * orbit_x + orbit_y * orbit_y)) / 2;
   project_planet(center_x, center_y, rad, star_r, star_g, star_b);
   offscreen1.endDraw();
   surface1.render(offscreen1);
