@@ -111,29 +111,18 @@ void initCalibrate() {
 
 
 void draw() {
-  offscreen2.beginDraw();
-  offscreen2.background(0);
-  offscreen2.image(hr, 0, 0);
-  offscreen2.endDraw();
-
-  offscreen3.beginDraw();
-  offscreen3.background(0);
-  offscreen3.image(slider, 0, 0);
-  offscreen3.endDraw();
-
   background(0);
   
-  
+  // ------------- //
+
   offscreen4.beginDraw();
-   offscreen4.background(255);
-   offscreen4.stroke(0);
-   long now = System.currentTimeMillis();
+  offscreen4.background(255);
+  offscreen4.stroke(0);
+  long now = System.currentTimeMillis();
 
   // //draw the "mat"
-   offscreen4.fill(255);
-   offscreen4.rect(45, 45, 410, 410);
-
-
+  offscreen4.fill(255);
+  offscreen4.rect(45, 45, 410, 410);
   
   int i = 0;
   for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
@@ -174,7 +163,7 @@ void draw() {
     } 
 
   //START DO NOT EDIT
-  //did we lost some cubes?
+  //did we lose some cubes?
   for (i=0; i<nCubes; ++i) {
     // 500ms since last update
     cubes[i].p_isLost = cubes[i].isLost;
@@ -187,6 +176,8 @@ void draw() {
   
   surface4.render(offscreen4);
   //END DO NOT EDIT
+
+  // ------------- //
   
   if (!calibrated) {
     return;
@@ -204,30 +195,25 @@ void draw() {
       
     }
 
-
   motionRequest(toioMap.get("timeline").id);
+
+  // ------------- //
   
-  // no arguments
+  // no arguments: this includes offscreen2 and 3 draw calls.
   project_hr_and_slider();
 
-
-  // arguments:
-  // 1. float x pos of orbiting toio
-  // 2. float y pos of orbiting toio transformed
+  offscreen1.beginDraw();
   float orbit_x = toioMap.get("planet_orbit").getXPos();
   float orbit_y = toioMap.get("planet_orbit").getYPos();
   orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
   orbit_y = convertCoordSystem(orbit_y,-100,100,0,1000);
-  //project_trail(orbit_x,orbit_y);
-  
-    // arguments:
-  // float x, float y, float rad, float r, float g, float b
-  // x, y at center of the second toio map
+  project_trail(orbit_x,orbit_y);
   
   // These are in the [-100, 100] coordinate system
   float center_x = 0.0;
   float center_y = 0.0;
   float rad = (float) Math.sqrt((double) (orbit_x * orbit_x + orbit_y * orbit_y)) / 2;
   project_planet(center_x, center_y, rad, star_r, star_g, star_b);
-  surface.render(offscreen1);
+  offscreen1.endDraw();
+  surface1.render(offscreen1);
 }

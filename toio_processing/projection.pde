@@ -1,7 +1,7 @@
 import deadpixel.keystone.*;
 
 Keystone ks;
-CornerPinSurface surface, surface2, surface3, surface4;
+CornerPinSurface surface1, surface2, surface3, surface4;
 PGraphics offscreen1, offscreen2, offscreen3, offscreen4;
 
 // offscreen/surface1: orbit demo
@@ -31,11 +31,11 @@ void project_hr_and_slider() {
 
 void projection_setup() {
   ks = new Keystone(this);
-  surface = ks.createCornerPinSurface(400, 400, 20);
+  surface1 = ks.createCornerPinSurface(1000, 1000, 20);
   surface2 = ks.createCornerPinSurface(1000, 1080, 20);
   surface3 = ks.createCornerPinSurface(400, 400, 20);
   surface4 = ks.createCornerPinSurface(800, 800, 20); // debug toio
-  offscreen1 = createGraphics(400, 400, P3D);
+  offscreen1 = createGraphics(1000, 1000, P3D);
   offscreen4 = createGraphics(800, 800, P3D);
   
   offscreen2 = createGraphics(1000, 1080, P3D);
