@@ -16,6 +16,7 @@ void project_hr_and_slider() {
   offscreen2.beginDraw();
   offscreen2.background(0);
   offscreen2.rotate(PI);
+  offscreen2.translate(-1000, -1080);
   offscreen2.image(hr, 0, 0);
   offscreen2.endDraw();
 
@@ -25,8 +26,9 @@ void project_hr_and_slider() {
   offscreen3.endDraw();
 
   //background(0);
-  surface2.render(offscreen2);
   surface3.render(offscreen3);
+  surface2.render(offscreen2);
+  
 }
 
 

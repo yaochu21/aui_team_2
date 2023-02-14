@@ -72,6 +72,7 @@ class ToioManager:
         self.client.send_message("/toio", ["star_bot_r", *list(map(int, self.bottomrightrad))])
         self.client.send_message("/toio", ["planet_orbit", int(orbit_x), int(orbit_y)])
         self.client.send_message("/star_color", list(map(int, self.color)))
+        self.client.send_message("/star_radius", [radius * 5])
 
         if self.update_measure is not None:
             sleep(3) # Wait for updates

@@ -1,4 +1,5 @@
 int star_r = 0, star_g = 0, star_b = 0;
+float star_rad = 50;
 void oscEvent(OscMessage msg) {
   
   if (msg.checkAddrPattern("/position")) {
@@ -144,5 +145,9 @@ void oscEvent(OscMessage msg) {
     star_r = msg.get(0).intValue();
     star_g = msg.get(1).intValue();
     star_b = msg.get(2).intValue();
+  }
+  else if (msg.checkAddrPattern("/star_radius")) {
+    star_rad = msg.get(0).floatValue();
+
   }
 }

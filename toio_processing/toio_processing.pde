@@ -206,7 +206,7 @@ void draw() {
   offscreen1.background(0);
   float orbit_x = toioMap.get("planet_orbit").getXPos();
   float orbit_y = toioMap.get("planet_orbit").getYPos();
-  float rad = (float) Math.sqrt((double) (orbit_x * orbit_x + orbit_y * orbit_y)) / 2;
+  
   orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
   orbit_y = convertCoordSystem(orbit_y,-100,100,0,1000);
   project_trail(orbit_x,orbit_y);
@@ -215,7 +215,7 @@ void draw() {
   float center_x = 500.0;
   float center_y = 500.0;
   
-  project_planet(center_x, center_y, rad, star_r, star_g, star_b);
+  project_planet(center_x, center_y, star_rad, star_r, star_g, star_b);
   offscreen1.endDraw();
   surface1.render(offscreen1);
 }
