@@ -11,14 +11,8 @@ NetAddress[] server;
 Cube[] cubes;
 
 // Track specific toio functions to easy to digest references
-HashMap<String, Cube> toioMap;
+HashMap<String, Cube>;
 
-Keystone ks;
-CornerPinSurface surface, surface2, surface3;
-PGraphics offscreen, offscreen2, offscreen3;
-
-PImage hr;
-PImage slider;
 
 void settings() {
   size(1000, 1000, P3D);
@@ -49,6 +43,8 @@ void setup() {
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
+
+
   trail_setup();
   planet_setup();
 }
@@ -104,33 +100,7 @@ void initCalibrate() {
   }
 }
 
-void projection_setup() {
-  ks = new Keystone(this);
-  surface = ks.createCornerPinSurface(400, 400, 20);
-  surface2 = ks.createCornerPinSurface(400, 400, 20);
-  surface3 = ks.createCornerPinSurface(400, 400, 20);
-  offscreen = createGraphics(400, 400, P3D);
-  offscreen2 = createGraphics(400, 400, P3D);
-  offscreen3 = createGraphics(400, 400, P3D);
-  hr = loadImage('hr_static.png');
-  slider = loadImage('slider.png');
-}
-
 void draw() {
-
-  offscreen2.beginDraw();
-  offscreen2.background(0);
-  offscreen2.image(hr, 0, 0);
-  offscreen2.endDraw();
-
-  offscreen3.beginDraw();
-  offscreen3.background(0);
-  offscreen3.image(slider, 0, 0);
-  offscreen3.endDraw();
-
-  background(0);
-  surface2.render(offscreen2);
-  surface3.render(offscreen3);
 
   //START DO NOT EDIT
   
@@ -197,7 +167,6 @@ void draw() {
     
   }
 
-
   //START DO NOT EDIT
   //did we lost some cubes?
   for (i=0; i<nCubes; ++i) {
@@ -209,8 +178,21 @@ void draw() {
   }
   //END DO NOT EDIT
 
-  // trail_draw();
-  // planet_draw();
+  // no arguments
+  project_hr_and_slider();
 
+  // arguments:
+  // float x, float y, float rad, float r, float g, float b
+  // x, y at center of the second toio map
+  project_planet();
+
+  // arguments:
+  // 1. float x pos of orbiting toio
+  // 2. float y pos of orbiting toio transformed
+  float orbit_x = toioMap.get("planet_orbit").getXPos();
+  float orbit_y = toioMap.get("planet_orbit").getYPos();
+  orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
+  orbit_y = convertCoordSystem(orbit_y,-100,100,0,1000);
+  project_trail(orbit_x,orbit_y);
   
 }

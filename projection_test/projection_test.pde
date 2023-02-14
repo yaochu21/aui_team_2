@@ -4,6 +4,10 @@ Keystone ks;
 CornerPinSurface surface, surface2, surface3;
 PGraphics offscreen, offscreen2, offscreen3;
 
+// offscreen/surface1: orbit demo
+// offscreen/surface2: hr diagram
+// offscreen/surface3: slider
+
 PImage hr;
 PImage slider;
 
@@ -43,14 +47,6 @@ void projection_setup() {
   slider = loadImage("slider.png");
   slider.resize(400,100);
 }
-
-
-
-
-
-
-
-
 
 
 // Keystone ks;

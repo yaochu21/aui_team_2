@@ -90,7 +90,7 @@ void planet_setup() {
     // rectMode(CENTER);
 }
 
-void planet_draw(float x, float y, float illuminosity, float rad, float r, float g, float b) {
+void project_planet(float x, float y, float rad, float r, float g, float b) {
     float radius = rad;
     PColor c = new PColor(r-rad,g-rad,b-rad,1);
     float decrement = 1;
@@ -98,21 +98,10 @@ void planet_draw(float x, float y, float illuminosity, float rad, float r, float
     float step = 0;
     float total = floor(radius);
     while (step < total) {
-        fill(c.t_r,c.t_g,c.t_b);
+        offscreen1.fill(c.t_r,c.t_g,c.t_b);
         c.increment_color();
         radius = rad - pow((step / total),3) * (rad);
-        ellipse(x,y,radius*2,radius*2);
+        offscreen1.ellipse(x,y,radius*2,radius*2);
         step += 1;
     }
-
-    //FunctionCounter counter = new FunctionCounter(0,radius,floor(radius));
-
-    // int step = floor(radius);
-    // while (step > -1) {
-    //     fill(c.t_r,c.t_g,c.t_b);
-    //     c.increment_color();
-    //     ellipse(x,y,radius*2,radius*2);
-    //     radius = counter.GetLinearValue(step);
-    //     step -= 1;
-    // } 
 }
