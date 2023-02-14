@@ -90,14 +90,14 @@ void trail_setup() {
     trail = new Trail(20,40,new Color(251,109,109,255));
 }
 
-void trail_draw(float x, float y, Trail trail) {
+void project_trail(float x, float y) {
     trail.UpdateMousePositions(x,y);
     trail.UpdateParticles();
 
     noStroke();
     for (int i = 0; i < trail.particles.size(); i++) {
         Particle particle = trail.particles.get(i);
-        fill(particle.col.r,particle.col.g,particle.col.b,particle.col.a);
-        circle(particle.position.x,particle.position.y,dotSize);
+        offscreen1.fill(particle.col.r,particle.col.g,particle.col.b,particle.col.a);
+        offscreen1.circle(particle.position.x,particle.position.y,dotSize);
     }
 }

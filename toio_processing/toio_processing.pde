@@ -14,7 +14,7 @@ NetAddress[] server;
 Cube[] cubes;
 
 // Track specific toio functions to easy to digest references
-HashMap<String, Cube> toioMap;
+HashMap<String, Cube>;
 
 Keystone ks;
 CornerPinSurface surface, surface2, surface3, surface4;
@@ -52,6 +52,8 @@ void setup() {
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
+
+
   trail_setup();
   planet_setup();
   ks.toggleCalibration();
@@ -112,6 +114,7 @@ void initCalibrate() {
   }
 }
 
+<<<<<<< HEAD
 void projection_setup() {
   ks = new Keystone(this);
   surface = ks.createCornerPinSurface(800, 800, 20);
@@ -147,6 +150,9 @@ void draw() {
 
   
   
+=======
+void draw() {
+>>>>>>> 587a025adb8f14a5313c4498f78553eac03d2164
 
   //START DO NOT EDIT
   
@@ -216,7 +222,6 @@ void draw() {
       
   }
 
-
   //START DO NOT EDIT
   //did we lost some cubes?
   for (i=0; i<nCubes; ++i) {
@@ -234,6 +239,7 @@ void draw() {
   surface4.render(offscreen4);
   //END DO NOT EDIT
 
+<<<<<<< HEAD
   // trail_draw();
   // planet_draw();
 
@@ -248,4 +254,23 @@ void keyPressed() {
     calibration = !calibration;
     break;
   }
+=======
+  // no arguments
+  project_hr_and_slider();
+
+  // arguments:
+  // float x, float y, float rad, float r, float g, float b
+  // x, y at center of the second toio map
+  project_planet();
+
+  // arguments:
+  // 1. float x pos of orbiting toio
+  // 2. float y pos of orbiting toio transformed
+  float orbit_x = toioMap.get("planet_orbit").getXPos();
+  float orbit_y = toioMap.get("planet_orbit").getYPos();
+  orbit_x = convertCoordSystem(orbit_x,-100,100,0,1000);
+  orbit_y = convertCoordSystem(orbit_y,-100,100,0,1000);
+  project_trail(orbit_x,orbit_y);
+  
+>>>>>>> 587a025adb8f14a5313c4498f78553eac03d2164
 }

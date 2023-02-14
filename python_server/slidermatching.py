@@ -1,4 +1,4 @@
-slidercord = (-35,-80)
+slidercord = (-35,80)
 
 def slidermatching(slidercord):
     sliderx_cord = float(slidercord[0])
@@ -9,8 +9,8 @@ def slidermatching(slidercord):
         topleftrad = (-10, 10)
         bottomleftrad = (-10, -10)
         bottomrightrad = (10, -10)
-        snap_hr_xcord = 60
-        snap_hr_ycord = -80
+        snap_hr_xcord = 35
+        snap_hr_ycord = 40
         snap_sliderpos = -50
         color = "red"
 
@@ -20,8 +20,8 @@ def slidermatching(slidercord):
         topleftrad = (-15, 15)
         bottomleftrad = (-15, -15)
         bottomrightrad = (15, -15)
-        snap_hr_xcord = 40
-        snap_hr_ycord = -60
+        snap_hr_xcord = 25
+        snap_hr_ycord = 30
         snap_sliderpos = -30
         color = "red"
 
@@ -32,8 +32,8 @@ def slidermatching(slidercord):
         topleftrad = (-30, 30)
         bottomleftrad = (-30, -30)
         bottomrightrad = (30, -30)
-        snap_hr_xcord = 10
-        snap_hr_ycord = 10
+        snap_hr_xcord = -25
+        snap_hr_ycord = -25
         snap_sliderpos = -10
         color = "yellow"
 
@@ -43,8 +43,8 @@ def slidermatching(slidercord):
         topleftrad = (-40, 40)
         bottomleftrad = (-40, -40)
         bottomrightrad = (40, -40)
-        snap_hr_xcord = 40
-        snap_hr_ycord = 40
+        snap_hr_xcord = 10
+        snap_hr_ycord = -60
         snap_sliderpos = 10
         color = "orange"
 
@@ -54,8 +54,8 @@ def slidermatching(slidercord):
         topleftrad = (-50, 50)
         bottomleftrad = (-50, -50)
         bottomrightrad = (50, -50)
-        snap_hr_xcord = 60
-        snap_hr_ycord = 60
+        snap_hr_xcord = 15
+        snap_hr_ycord = -80
         snap_sliderpos = 30
         color = "red"
 
@@ -65,14 +65,14 @@ def slidermatching(slidercord):
         topleftrad = (-20, 20)
         bottomleftrad = (-20, -20)
         bottomrightrad = (20, -20)
-        snap_hr_xcord = -5
-        snap_hr_ycord = -45
+        snap_hr_xcord = -30
+        snap_hr_ycord = 10
         snap_sliderpos = 50
         color = "blue"
 
     snap_hr_cords = (snap_hr_xcord, snap_hr_ycord, )
-    snap_sliderposcords = (snap_sliderpos,-80)
+    snap_sliderposcords = (snap_sliderpos,80)
 
     return [snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, snap_sliderposcords, color,]
 
-print(slidermatching((-35,-80))) #small
+print(slidermatching((-35,80))) #small

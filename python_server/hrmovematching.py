@@ -34,8 +34,8 @@ def convert_coord_sys(coord, old_sys_min, old_sys_max, new_sys_min, new_sys_max)
 
 def hrmatching(hr_xcord,hr_ycord):
     """Input current hr coordindinate postion, return hr, slider, and radius coordinates + color, luminoisty"""
-    absmag=convert_coord_sys(hr_ycord, -50, 100, 14, -10)
-    # print(absmag)
+    absmag=convert_coord_sys(hr_ycord, -100, 50, 14, -10)
+    print(absmag)
     #absmag=(hr_ycord/4.166)-10 #4.166 = 100/24
     ##temperature = convert_coord_sys(hr_xcord, -100, 50, 30000, 1000)
     classifval = convert_coord_sys(hr_xcord, -100, 50, 0, 7)
@@ -78,7 +78,7 @@ def hrmatching(hr_xcord,hr_ycord):
     radiusmatch=float(star_data.loc[mindist_index].iat[2])
 
     #snap_hr_ycord = absmagmatch* hr_ycord
-    snap_hr_ycord = convert_coord_sys(absmagmatch, 14, -10, -50, 100)
+    snap_hr_ycord = convert_coord_sys(absmagmatch, 14, -10, 50, -100)
     #snap_hr_xcord = temperaturematch/-100
     snap_hr_xcord = convert_coord_sys(classifval, 0,7,-100, 50)
     snap_hr_cords = (snap_hr_xcord,snap_hr_ycord)
@@ -112,12 +112,17 @@ def hrmatching(hr_xcord,hr_ycord):
         topleftrad = (-30, 30)
         bottomleftrad = (-30, -30)
         bottomrightrad = (30, -30)
-    if radiusmatch < 0.0001:
+    if radiusmatch >= 0.0001 and radiusmatch<0.001:
         # print("topleftrad0.001")
         toprightrad = (20, 20)
         topleftrad = (-20, 20)
         bottomleftrad = (-20, -20)
         bottomrightrad = (20, -20)
+    if radiusmatch < 0.0001:
+        toprightrad = (10, 10)
+        topleftrad = (-10, 10)
+        bottomleftrad = (-10, -10)
+        bottomrightrad = (10, -10)
     # etc
     # print("temperaturematch")
     # print(temperaturematch)
@@ -172,7 +177,7 @@ def hrmatching(hr_xcord,hr_ycord):
         # print(snap_sliderpos)
     #etc
 
-    return [snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (-80,snap_sliderpos), radiusmatch, color]
+    return [snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (80,snap_sliderpos), radiusmatch, color]
 
 #[(#,#),(#,#),(#,#),(#,#),(#,#),(#,#),"blue"]
 #[snap to hr coordinates, top left toio position, top right toio position, bottom left toio posion, bottom right toio posion, slider toio position, raw radius value, color]
@@ -181,7 +186,7 @@ def hrmatching(hr_xcord,hr_ycord):
 
 # print(dict)
 
-# print(hrmatching(40,90)) #low temp, high luminosity should match a red giant/super giant with big radius orange/red color
+# print(hrmatching(40,-90)) #low temp, high luminosity should match a red giant/super giant with big radius orange/red color
 
 
 
