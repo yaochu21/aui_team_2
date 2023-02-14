@@ -1,4 +1,4 @@
-float star_r = 0f, star_g = 0f, star_b = 0f;
+int star_r = 0, star_g = 0, star_b = 0;
 void oscEvent(OscMessage msg) {
   
   if (msg.checkAddrPattern("/position")) {
@@ -139,6 +139,7 @@ void oscEvent(OscMessage msg) {
     float yPos = msg.get(2).intValue();
     
     toioMap.get(toioName).setCoord(xPos, yPos);
+    
   } else if (msg.checkAddrPattern("/star_color")) {
     star_r = msg.get(0).intValue();
     star_g = msg.get(1).intValue();

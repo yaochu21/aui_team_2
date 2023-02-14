@@ -10,7 +10,7 @@ import slidermatching
 
 from threading import Thread
 
-FRAME_RATE = 15
+FRAME_RATE = 1
 
 class ToioManager:
     def __init__(self):
@@ -22,7 +22,7 @@ class ToioManager:
         self.client = udp_client.SimpleUDPClient("127.0.0.1", 3333)
         self.disp = Dispatcher()
         self.disp.map("/toio_input", self.handle_toio_pos_update)
-        self.server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 3334), self.disp)
+        self.server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 3335), self.disp)
         Thread(target=self.server.serve_forever).start()
 
         angle_speed = math.pi / 8 # pi/8 rad/s
@@ -61,6 +61,7 @@ class ToioManager:
         radius = math.sqrt((self.bottomleftrad[0] - self.toprightrad[0])**2 + (self.bottomleftrad[1] - self.toprightrad[1])**2) / 2 + 5
         orbit_x = radius * math.cos(self.angle)
         orbit_y = radius * math.sin(self.angle)
+        print(radius, orbit_x, orbit_y)
 
 
         self.client.send_message("/toio", ["hr", *list(map(int, self.snap_hr_cords))])

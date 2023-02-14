@@ -35,9 +35,10 @@ void setup() {
 
   //send back to the BLE interface
   //we can actually have multiple BLE bridges
-  server = new NetAddress[1]; //only one for now
+  server = new NetAddress[2]; //only one for now
   //send on port 3334
   server[0] = new NetAddress("127.0.0.1", 3334)  ;
+  server[1] = new NetAddress("127.0.0.1", 3335)  ;
 
   println("Starting program!");
   //create cubes
@@ -159,7 +160,7 @@ void draw() {
       msg.add(cube.getXPos());
       msg.add(cube.getYPos());
       
-      oscP5.send(msg, server[0]);
+      oscP5.send(msg, server[1]);
     }
     i += 1;
   }
@@ -170,19 +171,7 @@ void draw() {
      if (calibrated) {
        midi(0, 64, 255, 10);
      }
-    } else {
-      for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
-      String name = mapElement.getKey();
-      Cube cube = mapElement.getValue();
-      
-      if (!cube.isLost) {
-        offscreen4.fill(0, 255, 0);
-        println("Moving ", name, " to ", cube.targetx, cube.targety);
-      }
-    }
-
-      
-  }
+    } 
 
   //START DO NOT EDIT
   //did we lost some cubes?
@@ -201,7 +190,20 @@ void draw() {
   
   if (!calibrated) {
     return;
-  }
+  } 
+  
+  for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
+      String name = mapElement.getKey();
+      Cube cube = mapElement.getValue();
+      
+      if (!cube.isLost) {
+        offscreen4.fill(0, 255, 0);
+        println("Moving ", name, " to ", (int) cube.targetx, (int) cube.targety);
+        motorTarget(cube.id, 0, (int) cube.targetx, (int) cube.targety, 90);
+      }
+      
+    }
+
 
   motionRequest(toioMap.get("timeline").id);
   

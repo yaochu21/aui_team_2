@@ -100,7 +100,8 @@ class Cube {
     targetx = convertCoordSystem(regularXCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
     targety = convertCoordSystem(regularYCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
     
-    motorTarget(id, 0, (int) targetx, (int) targety, 0);
+    
+    //motorTarget(id, 0, (int) targetx, (int) targety, 90);
   }
   
   float getXPos() {
