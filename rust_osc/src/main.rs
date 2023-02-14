@@ -238,7 +238,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         search = true;
     }
 
-    let port_number = matches.opt_str("p").unwrap_or("3340".to_string());
+    let port_number = matches.opt_str("p").unwrap_or("3334".to_string());
     let listening_address = format!("0.0.0.0:{}", port_number);
 
     //this will be filled with the names to connect to *if needed*

@@ -18,7 +18,7 @@ boolean aimCubeSpeed(int id, float tx, float ty) {
   //println("dd is:" + dd);
   
   dd = min(dd, 1);
-  if (dd <.3) return true;
+  if (dd <.1) return true;
 
   int[] lr = cubes[id].aim(tx, ty);
   float left = (lr[0])*dd;

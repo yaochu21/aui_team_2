@@ -1,5 +1,6 @@
 
 void oscEvent(OscMessage msg) {
+  
   if (msg.checkAddrPattern("/position")) {
     //this collects position information 
     int hostId = msg.get(0).intValue();
@@ -132,6 +133,7 @@ void oscEvent(OscMessage msg) {
     cubes[id].speed_left = motor_left;
     cubes[id].speed_right = motor_right;
   } else if (calibrated && msg.checkAddrPattern("/toio")) {
+    
     String toioName = msg.get(0).stringValue();
     float xPos = msg.get(1).floatValue();
     float yPos = msg.get(2).floatValue();

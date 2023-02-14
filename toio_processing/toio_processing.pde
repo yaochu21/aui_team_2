@@ -1,5 +1,8 @@
+import deadpixel.keystone.*;
+
 import oscP5.*;
 import netP5.*;
+
 
 //for OSC
 OscP5 oscP5;
@@ -14,14 +17,14 @@ Cube[] cubes;
 HashMap<String, Cube> toioMap;
 
 Keystone ks;
-CornerPinSurface surface, surface2, surface3;
-PGraphics offscreen, offscreen2, offscreen3;
+CornerPinSurface surface, surface2, surface3, surface4;
+PGraphics offscreen, offscreen2, offscreen3, offscreen4;
 
 PImage hr;
 PImage slider;
 
 void settings() {
-  size(1000, 1000, P3D);
+  size((int) (.75 * 3120), (int) (.75 *  2160), P3D);
 }
 
 void setup() {
@@ -51,6 +54,7 @@ void setup() {
   frameRate(30);
   trail_setup();
   planet_setup();
+  ks.toggleCalibration();
 }
 
 float convertCoordSystem(float coord, int oldSysMin, int oldSysMax, int newSysMin, int newSysMax) {
@@ -110,18 +114,22 @@ void initCalibrate() {
 
 void projection_setup() {
   ks = new Keystone(this);
-  surface = ks.createCornerPinSurface(400, 400, 20);
-  surface2 = ks.createCornerPinSurface(400, 400, 20);
-  surface3 = ks.createCornerPinSurface(400, 400, 20);
+  surface = ks.createCornerPinSurface(800, 800, 20);
+  surface2 = ks.createCornerPinSurface(1000, 1080, 20);
+  surface3 = ks.createCornerPinSurface(800, 400, 20);
+  surface4 = ks.createCornerPinSurface(800, 800, 20);
   offscreen = createGraphics(400, 400, P3D);
-  offscreen2 = createGraphics(400, 400, P3D);
-  offscreen3 = createGraphics(400, 400, P3D);
-  hr = loadImage('hr_static.png');
-  slider = loadImage('slider.png');
+  offscreen2 = createGraphics(1000, 1080, P3D);
+  offscreen3 = createGraphics(400, 4800, P3D);
+  offscreen4 = createGraphics(800, 800, P3D);
+  hr = loadImage("hr_static.png");
+  hr.resize(1000,1080);
+  slider = loadImage("slider.png");
+  slider.resize(400,100);
 }
 
 void draw() {
-
+  print(toioMap.size());
   offscreen2.beginDraw();
   offscreen2.background(0);
   offscreen2.image(hr, 0, 0);
@@ -133,20 +141,24 @@ void draw() {
   offscreen3.endDraw();
 
   background(0);
-  surface2.render(offscreen2);
-  surface3.render(offscreen3);
+  offscreen4.beginDraw();
+  
+  
+
+  
+  
 
   //START DO NOT EDIT
   
   //the motion function sends a constant request for motion data from a toio ID
   //motionRequest(0);
-  // background(255);
-  // stroke(0);
-  // long now = System.currentTimeMillis();
+   offscreen4.background(255);
+   offscreen4.stroke(0);
+   long now = System.currentTimeMillis();
 
   // //draw the "mat"
-  // fill(255);
-  // rect(45, 45, 410, 410);
+   offscreen4.fill(255);
+   offscreen4.rect(45, 45, 410, 410);
 
   // //draw the cubes
   // for (int i = 0; i < cubes.length; ++i) {
@@ -158,19 +170,19 @@ void draw() {
       String name = mapElement.getKey();
       Cube cube = mapElement.getValue();
       if (cube.isLost==false) {
-        pushMatrix();
-        translate(cube.x, cube.y);
-        rotate(cube.deg * PI/180);
-        rect(-10, -10, 20, 20);
-        rect(0, -5, 20, 10);
-        popMatrix();
+        offscreen4.pushMatrix();
+        offscreen4.translate(cube.x, cube.y);
+        offscreen4.rotate(cube.deg * PI/180);
+        offscreen4.rect(-10, -10, 20, 20);
+        offscreen4.rect(0, -5, 20, 10);
+        offscreen4.popMatrix();
       }
       
-      fill(0, 0, 0);
-    text("Cube ID: " + name + " at (" + String.valueOf(cube.getXPos()) + ", " +
+    offscreen4.fill(0, 0, 0);
+    offscreen4.text("Cube ID: " + name + " at (" + String.valueOf(cube.getXPos()) + ", " +
        String.valueOf(cube.getYPos()) +")", 500, 100 + 60 * i);
-    text("Left motor speed: " + String.valueOf(cube.speed_left), 500, 120 + 60 * i);
-    text("Right motor speed: " + String.valueOf(cube.speed_right), 500, 140 + 60 * i);
+    offscreen4.text("Left motor speed: " + String.valueOf(cube.speed_left), 500, 120 + 60 * i);
+    offscreen4.text("Right motor speed: " + String.valueOf(cube.speed_right), 500, 140 + 60 * i);
     
     if (name.equals("hr") || name.equals("timeline")) {
       OscMessage msg = new OscMessage("/toio_input");
@@ -188,18 +200,19 @@ void draw() {
      if (calibrated) {
        midi(0, 64, 255, 10);
      }
-     return;
-    }
-    
-    for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
+    } else {
+      for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
       String name = mapElement.getKey();
       Cube cube = mapElement.getValue();
       
       if (!cube.isLost) {
-        fill(0, 255, 0);
+        offscreen4.fill(0, 255, 0);
         println("Moving ", name, " to ", cube.targetx, cube.targety);
-        aimCubeSpeed(i, cube.targetx, cube.targety);
+        aimCubeSpeed(cube.id, cube.targetx, cube.targety);
       }
+    }
+    
+    
       
   }
 
@@ -213,10 +226,26 @@ void draw() {
       cubes[i].isLost= true;
     }
   }
+  
+  offscreen4.endDraw();
+  
+  surface3.render(offscreen3);
+  surface2.render(offscreen2);
+  surface4.render(offscreen4);
   //END DO NOT EDIT
 
   // trail_draw();
   // planet_draw();
 
-  
+}
+
+boolean calibration = true;
+
+void keyPressed() {
+  switch (key) {
+  case 'c':
+    ks.toggleCalibration();
+    calibration = !calibration;
+    break;
+  }
 }

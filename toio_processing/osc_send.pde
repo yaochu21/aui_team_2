@@ -16,7 +16,6 @@
 //https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control
 //this controls the speed of the left motor, the the speed of the right motor, and the duration of the movement
 void motorControl(int cubeId, float leftspeed, float rightspeed, int duration) {
-  println("Moving toio", "motor control");
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
   OscMessage msg = new OscMessage("/motor");
@@ -34,7 +33,6 @@ void basicMotor(int cubeId, boolean leftforwards, int leftspeed, boolean rightfo
   
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
-  System.out.print("Motor basic");
   OscMessage msg = new OscMessage("/motorbasic");
   msg.add(actualcubeid);
   if (leftforwards) {
@@ -115,7 +113,6 @@ void light(int cubeId, int duration, int red, int green, int blue) {
   msg.add(red);
   msg.add(green);
   msg.add(blue);
-  print(cubeId, cubesPerHost);
   oscP5.send(msg, server[hostId]);
 }
 
