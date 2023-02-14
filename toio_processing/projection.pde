@@ -46,7 +46,7 @@ void projection_setup() {
   hr = loadImage("hr_static.png");
   hr.resize(1000,1080);
   slider = loadImage("slider.png");
-  slider.resize(400,100);
+  slider.resize(1920,1080);
 }
 
  void keyPressed() {

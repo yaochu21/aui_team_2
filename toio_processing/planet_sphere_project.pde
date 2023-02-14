@@ -91,7 +91,7 @@ void planet_setup() {
 }
 
 void project_planet(float x, float y, float rad, float r, float g, float b) {
-    float radius = rad * 3;
+    float radius = rad;
     PColor c = new PColor(r-rad,g-rad,b-rad,1);
     float decrement = 1;
 
