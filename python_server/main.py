@@ -37,6 +37,8 @@ class ToioManager:
             self.timeline_x = x_pos
             self.timeline_y = y_pos
 
+        # print("Message received")
+
     def update_projections(self):
         # TODO: update this with calculated parameters(?) for projections stuff
         pass
@@ -55,9 +57,9 @@ class ToioManager:
         snap_hr_xcord, snap_hr_ycord, radiuscoords, snap_sliderpos, color = hrmovematching.hrmatching(self.hr_x, self.hr_y)
 
         print(snap_hr_xcord, snap_hr_ycord)
-        self.client.send_message("/toio", ["hr", -50, -50])
-        self.client.send_message("/toio", ["timeline", 0, 50])
-        self.client.send_message("/toio", ["star_top_l", 50, y_pos])
+        self.client.send_message("/toio", ["hr", float(-50), float(-50)])
+        self.client.send_message("/toio", ["timeline", float(0), float(50)])
+        self.client.send_message("/toio", ["star_top_l", float(50), y_pos])
         self.client.send_message("/toio", ["star_top_r", x_pos, y_pos])
         self.client.send_message("/toio", ["star_bot_l", x_pos, y_pos])
         self.client.send_message("/toio", ["star_bot_r", x_pos, y_pos])
