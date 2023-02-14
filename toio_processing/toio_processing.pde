@@ -211,8 +211,8 @@ void draw() {
   project_trail(orbit_x,orbit_y);
   
   // These are in the [-100, 100] coordinate system
-  float center_x = 0.0;
-  float center_y = 0.0;
+  float center_x = 500.0;
+  float center_y = 500.0;
   float rad = (float) Math.sqrt((double) (orbit_x * orbit_x + orbit_y * orbit_y)) / 2;
   project_planet(center_x, center_y, rad, star_r, star_g, star_b);
   offscreen1.endDraw();
