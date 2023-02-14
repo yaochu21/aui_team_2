@@ -14,14 +14,21 @@ Cube[] cubes;
 HashMap<String, Cube> toioMap;
 
 Keystone ks;
-CornerPinSurface surface, surface2;
-PGraphics offscreen, offscreen2;
+CornerPinSurface surface, surface2, surface3;
+PGraphics offscreen, offscreen2, offscreen3;
+
+PImage hr;
+PImage slider;
 
 void settings() {
   size(1000, 1000, P3D);
 }
 
 void setup() {
+
+  projection_setup();
+
+
   // for OSC
   // receive messages on port 3333
   oscP5 = new OscP5(this, 3333);
@@ -42,9 +49,8 @@ void setup() {
   //do not send TOO MANY PACKETS
   //we'll be updating the cubes every frame, so don't try to go too high
   frameRate(30);
-
-  hr_setup();
   trail_setup();
+  planet_setup();
 }
 
 float convertCoordSystem(float coord, int oldSysMin, int oldSysMax, int newSysMin, int newSysMax) {
@@ -99,27 +105,49 @@ void initCalibrate() {
 }
 
 void projection_setup() {
+  ks = new Keystone(this);
   surface = ks.createCornerPinSurface(400, 400, 20);
   surface2 = ks.createCornerPinSurface(400, 400, 20);
+  surface3 = ks.createCornerPinSurface(400, 400, 20);
+  offscreen = createGraphics(400, 400, P3D);
+  offscreen2 = createGraphics(400, 400, P3D);
+  offscreen3 = createGraphics(400, 400, P3D);
+  hr = loadImage('hr_static.png');
+  slider = loadImage('slider.png');
 }
 
 void draw() {
+
+  offscreen2.beginDraw();
+  offscreen2.background(0);
+  offscreen2.image(hr, 0, 0);
+  offscreen2.endDraw();
+
+  offscreen3.beginDraw();
+  offscreen3.background(0);
+  offscreen3.image(slider, 0, 0);
+  offscreen3.endDraw();
+
+  background(0);
+  surface2.render(offscreen2);
+  surface3.render(offscreen3);
+
   //START DO NOT EDIT
   
   //the motion function sends a constant request for motion data from a toio ID
   //motionRequest(0);
-  background(255);
-  stroke(0);
-  long now = System.currentTimeMillis();
+  // background(255);
+  // stroke(0);
+  // long now = System.currentTimeMillis();
 
-  //draw the "mat"
-  fill(255);
-  rect(45, 45, 410, 410);
+  // //draw the "mat"
+  // fill(255);
+  // rect(45, 45, 410, 410);
 
-  //draw the cubes
-  for (int i = 0; i < cubes.length; ++i) {
+  // //draw the cubes
+  // for (int i = 0; i < cubes.length; ++i) {
     
-  }
+  // }
   
   int i = 0;
   for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
@@ -150,9 +178,6 @@ void draw() {
     }
     i += 1;
   }
-
-  
-  
   
     if (!calibrated) {
      initCalibrate(); 
@@ -184,8 +209,8 @@ void draw() {
   }
   //END DO NOT EDIT
 
-  trail_draw();
-  planet_draw();
+  // trail_draw();
+  // planet_draw();
 
   
 }
