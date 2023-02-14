@@ -77,7 +77,7 @@ def slidermatching(slidercord):
         snap_hr_xcord = -30
         snap_hr_ycord = 10
         snap_sliderpos = 50
-        color = (150.0,220.0,255.0) # blue
+        color = (0.0,0.0,0.0) # black
 
     snap_hr_cords = (snap_hr_xcord, snap_hr_ycord )
     snap_sliderposcords = (snap_sliderpos,80)
