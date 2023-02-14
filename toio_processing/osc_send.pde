@@ -16,6 +16,7 @@
 //https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control
 //this controls the speed of the left motor, the the speed of the right motor, and the duration of the movement
 void motorControl(int cubeId, float leftspeed, float rightspeed, int duration) {
+  println("Moving toio", "motor control");
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
   OscMessage msg = new OscMessage("/motor");
@@ -30,6 +31,7 @@ void motorControl(int cubeId, float leftspeed, float rightspeed, int duration) {
 //basic motor control (advanced), specification found at:
 //https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control
 void basicMotor(int cubeId, boolean leftforwards, int leftspeed, boolean rightforwards, int rightspeed) {
+  
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
   System.out.print("Motor basic");
@@ -68,6 +70,7 @@ void motorTarget(int cubeId, int mode, int x, int y, int theta){
 //motor control with target advanced (simplified), specification found at:
 //https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified
 void motorTarget(int cubeId, int control, int timeout, int mode, int maxspeed, int speedchange,  int x, int y, int theta){
+  
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
   OscMessage msg = new OscMessage("/motortarget");

@@ -4,6 +4,8 @@ from time import sleep
 
 from typing import List, Any
 
+import hrmovematching
+
 from threading import Thread
 
 FRAME_RATE = 30
@@ -49,12 +51,13 @@ class ToioManager:
         x_pos = 0.0  
         y_pos = 0.0
 
-        # Example code below for accessing class vars
-        x, y = self.find_closest_point(self.hr_x, self.hr_y)
 
+        snap_hr_xcord, snap_hr_ycord, radiuscoords, snap_sliderpos, color = hrmovematching.hrmatching(self.hr_x, self.hr_y)
+
+        print(snap_hr_xcord, snap_hr_ycord)
         self.client.send_message("/toio", ["hr", -50, -50])
-        self.client.send_message("/toio", ["timeline", 0, ])
-        self.client.send_message("/toio", ["star_top_l", x_pos, y_pos])
+        self.client.send_message("/toio", ["timeline", 0, 50])
+        self.client.send_message("/toio", ["star_top_l", 50, y_pos])
         self.client.send_message("/toio", ["star_top_r", x_pos, y_pos])
         self.client.send_message("/toio", ["star_bot_l", x_pos, y_pos])
         self.client.send_message("/toio", ["star_bot_r", x_pos, y_pos])

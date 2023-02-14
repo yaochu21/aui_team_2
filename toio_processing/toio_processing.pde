@@ -27,9 +27,9 @@ void setup() {
   //we can actually have multiple BLE bridges
   server = new NetAddress[1]; //only one for now
   //send on port 3334
-  server[0] = new NetAddress("127.0.0.1", 3334);
+  server[0] = new NetAddress("127.0.0.1", 3334)  ;
 
-
+  println("Starting program!");
   //create cubes
   cubes = new Cube[nCubes];
   for (int i = 0; i< cubes.length; ++i) {
@@ -54,16 +54,6 @@ float convertCoordSystem(float coord, int oldSysMin, int oldSysMax, int newSysMi
   return newCoord;
 }
 
-
-
-Cube hrCubeInput = null;
-Cube timelineCubeInput = null;
-Cube topLeftStarOutput = null;
-Cube topRightStarOutput = null;
-Cube bottomLeftStarOutput = null;
-Cube bottomRightStarOutput = null;
-Cube orbitingPlanetOutput = null;
-
 boolean calibrated = false;
   
 void initCalibrate() {
@@ -72,18 +62,32 @@ void initCalibrate() {
       float x = cubes[i].getXPos();
       float y = cubes[i].getYPos();
       if (x < -20 && y < -20) {
+        cubes[i].setXCoord(-100);
+        cubes[i].setYCoord(-100);
         toioMap.put("hr", cubes[i]); // top left quadrant, left mat
       } else if (x > 20 && y < -20) {
+        cubes[i].setXCoord(100);
+        cubes[i].setYCoord(100);
         toioMap.put("planet_orbit", cubes[i]); // top right quadrant, right mat
       } else if (x < -20 && y > 20) {
+        cubes[i].setXCoord(0);
+        cubes[i].setYCoord(50);
         toioMap.put("timeline", cubes[i]); // bottom left quadrant, left mat
       } else if (x > -20 && x < 50 && y > -20 && y < 50) {
+        cubes[i].setXCoord(-50);
+        cubes[i].setYCoord(-50);
         toioMap.put("star_top_l", cubes[i]);
       } else if (x > 50 && y > -20 && y < 50) {
+        cubes[i].setXCoord(50);
+        cubes[i].setYCoord(-50);
         toioMap.put("star_top_r", cubes[i]);
       } else if (x > -20 && x < 50 && y > 50) {
+        cubes[i].setXCoord(-50);
+        cubes[i].setYCoord(50);
         toioMap.put("star_bot_l", cubes[i]);
       } else if (x > 50 && y > 50) {
+        cubes[i].setXCoord(50);
+        cubes[i].setYCoord(50);
         toioMap.put("star_bot_r", cubes[i]);
       }
     }
@@ -139,9 +143,6 @@ void draw() {
     }
     i += 1;
   }
-
-  
-  
   
     if (!calibrated) {
      initCalibrate(); 
@@ -150,15 +151,17 @@ void draw() {
      }
      return;
     }
-
-    // Allows cubes to move towards target
-    for (i = 0; i< nCubes; ++i) {
-      if (cubes[i].isLost==false) {
-        fill(0, 255, 0);
-        
-        aimCubeSpeed(i, cubes[i].targetx, cubes[i].targety);
-      }
     
+    for (HashMap.Entry<String, Cube> mapElement : toioMap.entrySet()) {
+      String name = mapElement.getKey();
+      Cube cube = mapElement.getValue();
+      
+      if (!cube.isLost) {
+        fill(0, 255, 0);
+        println("Moving ", name, " to ", cube.targetx, cube.targety);
+        aimCubeSpeed(i, cube.targetx, cube.targety);
+      }
+      
   }
 
 
