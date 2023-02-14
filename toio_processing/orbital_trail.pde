@@ -1,5 +1,3 @@
-
-
 public class Color {
     public float r;
     public float g;
@@ -85,21 +83,14 @@ public class Trail {
 
 }
 
-Trail trail = new Trail(20,40,new Color(251,109,109,255));
+Trail trail; 
 float dotSize = 5;
 
-void setup() {
-    size(512,512);
+void trail_setup() {
+    trail = new Trail(20,40,new Color(251,109,109,255));
 }
 
-void draw() {
-    background(233, 233, 233, 1);
-    draw_orbital_trail(mouseX,mouseY,trail);
-    // println("num particles: "+trail.particles.size());
-    // println("num mouse pos: "+trail.mousePositions.size());
-}
-
-void draw_orbital_trail(float x, float y, Trail trail) {
+void trail_draw(float x, float y, Trail trail) {
     trail.UpdateMousePositions(x,y);
     trail.UpdateParticles();
 

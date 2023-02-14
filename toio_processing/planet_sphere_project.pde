@@ -1,4 +1,4 @@
-public class Color {
+public class PColor {
     public float r;
     public float g;
     public float b;
@@ -9,7 +9,7 @@ public class Color {
     public float t_b;
     public float t_a;
     
-    Color(float red, float green, float blue, float alpha) {
+    PColor(float red, float green, float blue, float alpha) {
         r = red;
         g = green;
         b = blue;
@@ -82,23 +82,17 @@ public class FunctionCounter {
 }
 
 //Color col = new Color(255,255,255,1);
-Color col = new Color(173,211,255,1);
+PColor col = new PColor(173,211,255,1);
 
-void setup() {
-    noStroke();
-    size(512, 512);
-    rectMode(CENTER);
-    
+void planet_setup() {
+    // noStroke();
+    // size(512, 512);
+    // rectMode(CENTER);
 }
 
-void draw() {
-    background(233,233,233,1);
-    generate_planet_projection(mouseX,mouseY,10,100,col.r,col.g,col.b);
-}
-
-void generate_planet_projection(float x, float y, float illuminosity, float rad, float r, float g, float b) {
+void planet_draw(float x, float y, float illuminosity, float rad, float r, float g, float b) {
     float radius = rad;
-    Color c = new Color(r-rad,g-rad,b-rad,1);
+    PColor c = new PColor(r-rad,g-rad,b-rad,1);
     float decrement = 1;
 
     float step = 0;
