@@ -136,19 +136,19 @@ def hrmatching(hr_xcord,hr_ycord):
         color = (255.0, 0.0, 0.0) # red
         # print(color)
     elif temperaturematch <= 5000 and temperaturematch > 3600:
-        color = (255.0, 165.0, 0.0) # orange
+        color = (251.0,167.0,0.0) # orange
         # print(color)
     elif temperaturematch <= 6000 and temperaturematch > 5000:
-        color = (213.0, 171.0, 85.0) # yellow
+        color = (255.0,253.0,105.0) # yellow
         # print(color)
     elif temperaturematch <= 7500 and temperaturematch > 5000:
-        color = (255.0, 255.0, 246.0) # white_y? what's this??
+        color = (254.0,255.0,238.0) # white_y? what's this?? yellowish-white
         # print(color)
     elif temperaturematch <= 11000 and temperaturematch > 7500:
         color = (255.0, 255.0, 255.0) 
         print(color)
     elif temperaturematch > 11000:
-        color = (0.0, 0.0, 255.0)  # blue
+        color = (150.0,220.0,255.0)  # blue
         # print(color)
     #etc
 
