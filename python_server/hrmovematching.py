@@ -94,31 +94,36 @@ def hrmatching(hr_xcord,hr_ycord):
         topleftrad = (-50,50)
         bottomleftrad = (-50,-50)
         bottomrightrad= (50,-50)
-    if radiusmatch>=100 and radiusmatch<1000:
+    elif radiusmatch>=100 and radiusmatch<1000:
         # print("topleftrad10")
         toprightrad = (45,45)
         topleftrad = (-45,45)
         bottomleftrad = (-45,-45)
         bottomrightrad= (45,-45)
-    if radiusmatch>= 1 and radiusmatch<100:
+    elif radiusmatch>= 1 and radiusmatch<100:
         # print("topleftrad0.1")
         toprightrad = (40, 40)
         topleftrad = (-40, 40)
         bottomleftrad = (-40, -40)
         bottomrightrad = (40, -40)
-    if radiusmatch>= 0.001 and radiusmatch<0.01:
+    elif radiusmatch>= 0.001 and radiusmatch<0.01:
         # print("topleftrad0.01")
         toprightrad = (30, 30)
         topleftrad = (-30, 30)
         bottomleftrad = (-30, -30)
         bottomrightrad = (30, -30)
-    if radiusmatch >= 0.0001 and radiusmatch<0.001:
+    elif radiusmatch >= 0.0001 and radiusmatch<0.001:
         # print("topleftrad0.001")
         toprightrad = (20, 20)
         topleftrad = (-20, 20)
         bottomleftrad = (-20, -20)
         bottomrightrad = (20, -20)
-    if radiusmatch < 0.0001:
+    elif radiusmatch < 0.0001:
+        toprightrad = (10, 10)
+        topleftrad = (-10, 10)
+        bottomleftrad = (-10, -10)
+        bottomrightrad = (10, -10)
+    else:
         toprightrad = (10, 10)
         topleftrad = (-10, 10)
         bottomleftrad = (-10, -10)
@@ -128,22 +133,22 @@ def hrmatching(hr_xcord,hr_ycord):
     # print(temperaturematch)
     if temperaturematch<=3600 :
         # print("colorred")
-        color = ["red"]
+        color = (255.0, 0.0, 0.0) # red
         # print(color)
     elif temperaturematch <= 5000 and temperaturematch > 3600:
-        color = ["orange"]
+        color = (255.0, 165.0, 0.0) # orange
         # print(color)
     elif temperaturematch <= 6000 and temperaturematch > 5000:
-        color = ["yellow"]
+        color = (213.0, 171.0, 85.0) # yellow
         # print(color)
     elif temperaturematch <= 7500 and temperaturematch > 5000:
-        color = ["white_y"]
+        color = (255.0, 255.0, 246.0) # white_y? what's this??
         # print(color)
     elif temperaturematch <= 11000 and temperaturematch > 7500:
-        color = ["white"]
+        color = (255.0, 255.0, 255.0) 
         print(color)
     elif temperaturematch > 11000:
-        color = ["blue"]
+        color = (0.0, 0.0, 255.0)  # blue
         # print(color)
     #etc
 
@@ -169,15 +174,15 @@ def hrmatching(hr_xcord,hr_ycord):
         # print(snap_sliderpos)
     elif startype == 4:
         # print("sliderpos4")
-        snap_sliderpos =  10
+        snap_sliderpos =  10.0
         # print(snap_sliderpos)
     elif startype == 5:
         # print("sliderpos5")
-        snap_sliderpos =  30
+        snap_sliderpos =  30.0
         # print(snap_sliderpos)
     #etc
 
-    return [snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (80,snap_sliderpos), radiusmatch, color]
+    return snap_hr_cords, topleftrad, toprightrad, bottomleftrad, bottomrightrad, (80.0,snap_sliderpos), radiusmatch, color
 
 #[(#,#),(#,#),(#,#),(#,#),(#,#),(#,#),"blue"]
 #[snap to hr coordinates, top left toio position, top right toio position, bottom left toio posion, bottom right toio posion, slider toio position, raw radius value, color]

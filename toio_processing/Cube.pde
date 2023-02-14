@@ -94,17 +94,13 @@ class Cube {
   int MIN_GRID_BOUND = -100;
   int MAX_GRID_BOUND = 100;
   
-
-
-
-  void setXCoord(float regularCoord) {
-    // Set an X coordinate in [-100, 100] range to the toio (circle) mat space
-    targetx = convertCoordSystem(regularCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
-  }
-  
-  void setYCoord(float regularCoord) {
+  void setCoord(float regularXCoord, float regularYCoord) {
     // Set an Y coordinate in [-100, 100] range to the toio (circle) mat space
-    targety = convertCoordSystem(regularCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
+    // Set an X coordinate in [-100, 100] range to the toio (circle) mat space
+    targetx = convertCoordSystem(regularXCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
+    targety = convertCoordSystem(regularYCoord, MIN_GRID_BOUND, MAX_GRID_BOUND, MIN_TOIO_BOUND, MAX_TOIO_BOUND);
+    
+    motorTarget(id, 0, (int) targetx, (int) targety, 0);
   }
   
   float getXPos() {

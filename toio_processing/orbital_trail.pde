@@ -93,11 +93,12 @@ void trail_setup() {
 void project_trail(float x, float y) {
     trail.UpdateMousePositions(x,y);
     trail.UpdateParticles();
-
-    noStroke();
+    offscreen1.beginDraw();
+    offscreen1.noStroke();
     for (int i = 0; i < trail.particles.size(); i++) {
         Particle particle = trail.particles.get(i);
         offscreen1.fill(particle.col.r,particle.col.g,particle.col.b,particle.col.a);
         offscreen1.circle(particle.position.x,particle.position.y,dotSize);
     }
+    offscreen1.endDraw();
 }

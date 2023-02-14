@@ -1,6 +1,5 @@
 // the most basic way to move a cube
 boolean aimCube(int id, float tx, float ty) {
-  
   if (cubes[id].distance(tx, ty)<25) return true;
   int[] lr = cubes[id].aim(tx, ty);
   float left = (lr[0]*.5);
@@ -14,11 +13,11 @@ boolean aimCube(int id, float tx, float ty) {
 
 boolean aimCubeSpeed(int id, float tx, float ty) {
   float dd = cubes[id].distance(tx, ty)/100.0;
-  print("Aim cube speed");
+  
   //println("dd is:" + dd);
   
   dd = min(dd, 1);
-  if (dd <.1) return true;
+  if (dd <.15) return true;
 
   int[] lr = cubes[id].aim(tx, ty);
   float left = (lr[0])*dd;
@@ -33,7 +32,6 @@ boolean aimCubeSpeed(int id, float tx, float ty) {
 //helper functions to drive the cubes
 
 boolean rotateCube(int id, float ta) {
-  
   float diff = ta-cubes[id].deg;
   if (diff>180) diff-=360;
   if (diff<-180) diff+=360;

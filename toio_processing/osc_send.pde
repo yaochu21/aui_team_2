@@ -54,6 +54,8 @@ void basicMotor(int cubeId, boolean leftforwards, int leftspeed, boolean rightfo
 //https://toio.github.io/toio-spec/en/docs/ble_motor#motor-control-with-target-specified
 //control, timeout, maxspeed, and speed change are preset
 void motorTarget(int cubeId, int mode, int x, int y, int theta){
+  if (cubes[cubeId].distance(x, y) < 5)
+    return;
   int hostId = cubeId/cubesPerHost;
   int actualcubeid = cubeId % cubesPerHost;
   OscMessage msg = new OscMessage("/motortarget");
