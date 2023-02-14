@@ -34,7 +34,7 @@ def slidermatching(slidercord):
         snap_hr_xcord = -25
         snap_hr_ycord = -25
         snap_sliderpos = -10
-        color = (213.0, 171.0, 85.0) # yellow
+        color = (255.0,253.0,105.0) # yellow
 
     elif sliderx_cord >= 0 and sliderx_cord < 20:
         startype = 4
@@ -45,7 +45,7 @@ def slidermatching(slidercord):
         snap_hr_xcord = 10
         snap_hr_ycord = -60
         snap_sliderpos = 10
-        color = (255.0, 165.0, 0.0) # orange
+        color = (251.0,167.0,0.0) # orange
 
     elif sliderx_cord >= 20 and sliderx_cord < 40:
         startype = 5
@@ -67,7 +67,7 @@ def slidermatching(slidercord):
         snap_hr_xcord = -30
         snap_hr_ycord = 10
         snap_sliderpos = 50
-        color = (0.0, 0.0, 255.0) # blue
+        color = (255.0, 255.0, 255.0) # white
     else: # default case
         startype = 2 #whitedwarf
         toprightrad = (20, 20)
@@ -77,7 +77,7 @@ def slidermatching(slidercord):
         snap_hr_xcord = -30
         snap_hr_ycord = 10
         snap_sliderpos = 50
-        color = (0.0, 0.0, 255.0) # blue
+        color = (150.0,220.0,255.0) # blue
 
     snap_hr_cords = (snap_hr_xcord, snap_hr_ycord )
     snap_sliderposcords = (snap_sliderpos,80)
